@@ -1,0 +1,29 @@
+{
+  "name": "fluxible-plugin-store-execute-action",
+  "version": "0.1.0",
+  "description": "A fluxible plugin that runs the React.Perf tools on every `executeAction` and `dispatch`.",
+  "main": "index.js",
+  "dependencies": {
+    "es6-promise": "^2.0.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/marnusw/fluxible-plugin-store-execute-action"
+  },
+  "keywords": [
+    "fluxible",
+    "react",
+    "react.Perf",
+    "performance",
+    "profiling"
+  ],
+  "author": "Marnus Weststrate <marnusw@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/marnusw/fluxible-plugin-store-execute-action/issues"
+  },
+  "homepage": "https://github.com/marnusw/fluxible-plugin-store-execute-action"
+}
