@@ -1,18 +1,21 @@
 fluxible-plugin-store-execute-action
-==========================
+====================================
 
 A temporary solution to get the `executeAction()` method on the Store Context for initiating async query actions.
+
+This plugin will be redundant once a proper solution is implemented for 
+[yahoo/fluxible#15](https://github.com/yahoo/fluxible/issues/15).
 
 ```
 npm install fluxible-plugin-store-execute-action 
 ```
 
-# Limitations
+## Limitations
 
 I'm assuming all executed actions return a `Promise` since that was my use case. If you are using
 callbacks, submit a PR with the necessary changes to support both and I'll merge it.
 
-# Usage
+## Usage
 
 Since plugins don't have access to the Fluxible Context internally and cross-context access is needed
 to call `actionContext.executeAction()` from `storeContext.executeAction()`, the context must be set
@@ -114,6 +117,6 @@ SomeStore.handlers = {
 
 ```
 
-# License
+## License
 
 MIT
