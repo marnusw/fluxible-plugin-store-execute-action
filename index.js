@@ -11,10 +11,9 @@ var Promise = require('es6-promise').Promise;
  *
  * A temporary solution to get the executeAction method on the Store Context for initiating async query actions.
  *
- * @param {Object} appContext The Fluxible Context of the application if its available yet, or use `setContext()` later.
  * @returns {Object} The StoreExecuteActionPlugin instance.
  */
-module.exports = function storeExecuteActionPlugin(appContext) {
+module.exports = function storeExecuteActionPlugin() {
 
   var serverSide = true;
 
@@ -55,9 +54,9 @@ module.exports = function storeExecuteActionPlugin(appContext) {
          *
          * @param {Object} storeContext
          */
-        plugStoreContext: function(storeContext) {
+        plugStoreContext: function(storeContext, context) {
           storeContext.executeAction = function(action, payload) {
-            var promise = appContext.getActionContext().executeAction(action, payload);
+            var promise = context.getActionContext().executeAction(action, payload);
 
             if (serverSide) {
               if (waiting) {
@@ -81,16 +80,6 @@ module.exports = function storeExecuteActionPlugin(appContext) {
           componentContext._getStoresPromise = waitOnPromises;
         }
       };
-    },
-
-    /**
-     * Use this to give the plugin access to the full application context once it's available.
-     * This will be used to retrieve the Action Context and the `executeAction` method.
-     *
-     * @param context
-     */
-    setContext: function(context) {
-      appContext = context;
     },
 
     /**

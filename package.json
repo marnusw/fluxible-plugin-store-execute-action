@@ -1,7 +1,7 @@
 {
   "name": "fluxible-plugin-store-execute-action",
   "version": "0.1.1",
-  "description": "A fluxible plugin that runs the React.Perf tools on every `executeAction` and `dispatch`.",
+  "description": "A temporary solution to get the executeAction method on the Store Context for initiating async query actions.",
   "main": "index.js",
   "dependencies": {
     "es6-promise": "^2.0.1"

@@ -17,12 +17,8 @@ callbacks, submit a PR with the necessary changes to support both and I'll merge
 
 ## Usage
 
-Since plugins don't have access to the Fluxible Context internally and cross-context access is needed
-to call `actionContext.executeAction()` from `storeContext.executeAction()`, the context must be set
-on the plugin during the application bootstrap.
-
-Thereafter, stores can execute actions via their context. As for components store actions should be
-fire and forget, and, therefore, a promises is not returned nor a done callback supported. Success
+Stores can execute actions via the `StoreContext`. As is the case for components, store actions should be
+fire and forget and, therefore, a promises is not returned nor a done callback supported. Success
 or failure of the asynchronous operation should be handled by dispatching appropriate actions.
 
 See the code examples below.
@@ -39,9 +35,6 @@ app.plug(StoreExecuteActionPlugin());
 // server.js
 
 var context = app.createContext({});
-
-// Once the plugin has a context stores can execute actions.
-app.getPlugin('StoreExecuteActionPlugin').giveContextAccess(context);
 
 // When using React-Router for example:
 router.run((Root, routerState) => {
@@ -64,12 +57,7 @@ router.run((Root, routerState) => {
 
 // client.js
 
-app.rehydrate(dehydratedState, function(err, context) {
-
-  app.getPlugin('StoreExecuteActionPlugin').giveContextAccess(context);
-
-  // Client rendering as usual...
-});
+// No special actions required.
 
 ```
 
