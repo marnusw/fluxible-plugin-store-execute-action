@@ -94,7 +94,13 @@ module.exports = function storeExecuteActionPlugin() {
     },
 
     /**
-     * Clear the flag to show we're now client side. (Plugins are always rehydrated)
+     * Dummy dehydrate forces rehydration on the client.
+     */
+    dehydrate: function() {
+      return {};
+    },
+    /**
+     * Clear the flag to show we're now client side.
      */
     rehydrate: function() {
       serverSide = false;
