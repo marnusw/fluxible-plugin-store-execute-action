@@ -53,6 +53,7 @@ module.exports = function storeExecuteActionPlugin() {
          * can detect when all queries have been completed.
          *
          * @param {Object} storeContext
+         * @param {Object} context The full FluxibleContext.
          */
         plugStoreContext: function(storeContext, context) {
           storeContext.executeAction = function(action, payload) {
