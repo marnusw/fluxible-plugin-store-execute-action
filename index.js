@@ -18,6 +18,7 @@ module.exports = function storeExecuteActionPlugin() {
   var serverSide = true;
 
   var promises = [];
+  var promisesKeyed = {};
   var waiting = null;
 
   function deletePromises() {
@@ -64,6 +65,9 @@ module.exports = function storeExecuteActionPlugin() {
                 throw new Error('Can\'t start more queries while waiting on previous promises');
               }
               promises.push(promise);
+              if (payload._queryId) {
+                promisesKeyed[payload._queryId] = promise;
+              }
             }
           };
         },
@@ -79,6 +83,23 @@ module.exports = function storeExecuteActionPlugin() {
          */
         plugComponentContext: function(componentContext) {
           componentContext._getStoresPromise = waitOnPromises;
+
+          componentContext.serverWaitFor = function() {
+            if (!serverSide) {
+              return Promise.resolve();
+            }
+
+            var promises = [];
+
+            for (var i = 0; i < arguments.length; ++i) {
+              var record = arguments[i];
+              promises.push(record.get('_isLoading') ? promisesKeyed[record.get('_queryId')] : Promise.resolve());
+            }
+
+            var promiseAll = Promise.all(promises);
+            promises.push(promiseAll); // So the server will wait for this promise as well.
+            return promiseAll;
+          }
         }
       };
     },
