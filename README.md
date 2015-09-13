@@ -10,11 +10,6 @@ This plugin will be redundant once a proper solution is implemented for
 npm install fluxible-plugin-store-execute-action 
 ```
 
-## Limitations
-
-I'm assuming all executed actions return a `Promise` since that was my use case. If you are using
-callbacks, submit a PR with the necessary changes to support both and I'll merge it.
-
 ## Usage
 
 Stores can execute actions via the `StoreContext`. As is the case for components, store actions should be
@@ -29,19 +24,19 @@ See the code examples below.
 
 // common.js
 
-import StoreExecuteActionPlugin from 'fluxible-plugin-storeExecuteAction';
+import StoreExecuteActionPlugin from 'fluxible-plugin-store-execute-action';
 app.plug(StoreExecuteActionPlugin());
 
 // server.js
 
-var context = app.createContext({});
+const context = app.createContext({});
 
 // When using React-Router for example:
 router.run((Root, routerState) => {
-  var componentContext = context.getComponentContext();
+  const componentContext = context.getComponentContext();
 
-  // Components retrieve data from stores in a static `routeQuery` method. Since the stores don't
-  // have cached data they execute async actions to retrieve it.
+  // Components retrieve data from stores in a static `routeQuery` method. Since the
+  // stores don't have cached data they execute async actions to retrieve it.
   routerState.routes
     .filter(route => route.handler.routeQuery)
     .forEach(route => route.handler.routeQuery(routerState.params, componentContext));
@@ -63,7 +58,7 @@ router.run((Root, routerState) => {
 
 ### Use within Stores
 
-```
+```javascript
 
 // findAction.js
 
@@ -93,7 +88,7 @@ class SomeStore extends BaseStore {
   }
   
   handleReceiveRecords(payload) {
-    payload.records.forEach(recordData => this.records[recordData.id] = recordData, this);
+    payload.records.forEach(recordData => this.records[recordData.id] = recordData);
     // Clear 'loading' flags.
     this.emitChange();
   }
@@ -107,4 +102,5 @@ SomeStore.handlers = {
 
 ## License
 
-MIT
+This software is free to use under the MIT license.
+See the [LICENSE file](LICENSE.md) for license text and copyright information.

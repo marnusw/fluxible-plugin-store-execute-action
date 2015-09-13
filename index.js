@@ -26,8 +26,10 @@ module.exports = function storeExecuteActionPlugin() {
   }
 
   function waitOnPromises() {
-    if (!serverSide) {
-      throw new Error('The promises on the storeContext should only be used server side');
+    if (process.env.NODE_ENV !== 'production') {
+      if (!serverSide) {
+        throw new Error('The promises on the storeContext should only be used server side');
+      }
     }
     if (!waiting) {
       waiting = Promise.all(promises).then(deletePromises, deletePromises);
@@ -60,8 +62,10 @@ module.exports = function storeExecuteActionPlugin() {
             var promise = context.getActionContext().executeAction(action, payload);
 
             if (serverSide) {
-              if (waiting) {
-                throw new Error('Can\'t start more queries while waiting on previous promises');
+              if (process.env.NODE_ENV !== 'production') {
+                if (waiting) {
+                  throw new Error('Can\'t start more queries while waiting on previous promises');
+                }
               }
               promises.push(promise);
             }
