@@ -1,5 +1,6 @@
 ### 0.2.1 (13 September 2015)
 
+* [ENHANCEMENT] Code linting using eslint.
 * [ENHANCEMENT] Exceptions aren't thrown in the production environment nor included in a production build.
 * [DOCUMENTATION] Minor fixes and improvements.
 * [DOCUMENTATION] Added a proper license file.

@@ -3,11 +3,18 @@
   "version": "0.2.0",
   "description": "A temporary solution to get the executeAction method on the Store Context for initiating async query actions.",
   "main": "index.js",
+  "scripts": {
+    "test": "echo \"No test implemented\" && exit 0",
+    "prepublish": "gulp eslint"
+  },
   "dependencies": {
     "es6-promise": "^2.0.1"
   },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "devDependencies": {
+    "babel-eslint": "^4.1.1",
+    "eslint": "^1.4.1",
+    "gulp": "^3.9.0",
+    "gulp-eslint": "^1.0.0"
   },
   "repository": {
     "type": "git",
@@ -15,10 +22,9 @@
   },
   "keywords": [
     "fluxible",
-    "react",
-    "react.Perf",
-    "performance",
-    "profiling"
+    "executeActions",
+    "storeContext",
+    "react"
   ],
   "author": "Marnus Weststrate <marnusw@gmail.com>",
   "license": "MIT",
