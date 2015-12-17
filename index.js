@@ -32,7 +32,12 @@ module.exports = function storeExecuteActionPlugin() {
       }
     }
     if (!waiting) {
-      waiting = Promise.all(promises).then(deletePromises, deletePromises);
+      waiting = Promise.all(promises)
+        .then(deletePromises)
+        .catch(function(error) {
+          deletePromises();
+          throw error;
+        });
     }
     return waiting;
   }
